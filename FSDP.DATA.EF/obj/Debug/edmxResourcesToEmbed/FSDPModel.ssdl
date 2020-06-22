@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FSDPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ClassInfo">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="ClassDate" Type="date" Nullable="false" />
+    <Property Name="LevelRequired" Type="int" Nullable="false" />
+    <Property Name="ClassLimit" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Level">
+    <Key>
+      <PropertyRef Name="LevelID" />
+    </Key>
+    <Property Name="LevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LevelName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LocationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="InstructorName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="ZipCode" Type="char" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OwnerAssets">
+    <Key>
+      <PropertyRef Name="OwnerAssetID" />
+    </Key>
+    <Property Name="OwnerAssetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OwnerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AssetPhoto" Type="nvarchar" MaxLength="50" />
+    <Property Name="LevelID" Type="int" Nullable="false" />
+    <Property Name="SpecialNotes" Type="varchar" MaxLength="300" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="DateAdded" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reservations">
+    <Key>
+      <PropertyRef Name="ReservationID" />
+    </Key>
+    <Property Name="ReservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OwnerAssetID" Type="int" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDetails">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ClassInfo_Level">
+    <End Role="Level" Type="Self.Level" Multiplicity="1" />
+    <End Role="ClassInfo" Type="Self.ClassInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="ClassInfo">
+        <PropertyRef Name="LevelRequired" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OwnerAssets_Level">
+    <End Role="Level" Type="Self.Level" Multiplicity="1" />
+    <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Level">
+        <PropertyRef Name="LevelID" />
+      </Principal>
+      <Dependent Role="OwnerAssets">
+        <PropertyRef Name="LevelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OwnerAssets_UserDetails">
+    <End Role="UserDetails" Type="Self.UserDetails" Multiplicity="1" />
+    <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDetails">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="OwnerAssets">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_ClassInfo">
+    <End Role="ClassInfo" Type="Self.ClassInfo" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassInfo">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservations_OwnerAssets">
+    <End Role="OwnerAssets" Type="Self.OwnerAssets" Multiplicity="1" />
+    <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnerAssets">
+        <PropertyRef Name="OwnerAssetID" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="OwnerAssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FSDPModelStoreContainer">
+    <EntitySet Name="ClassInfo" EntityType="Self.ClassInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Level" EntityType="Self.Level" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OwnerAssets" EntityType="Self.OwnerAssets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ClassInfo_Level" Association="Self.FK_ClassInfo_Level">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="ClassInfo" EntitySet="ClassInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OwnerAssets_Level" Association="Self.FK_OwnerAssets_Level">
+      <End Role="Level" EntitySet="Level" />
+      <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OwnerAssets_UserDetails" Association="Self.FK_OwnerAssets_UserDetails">
+      <End Role="UserDetails" EntitySet="UserDetails" />
+      <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_ClassInfo" Association="Self.FK_Reservations_ClassInfo">
+      <End Role="ClassInfo" EntitySet="ClassInfo" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_Locations" Association="Self.FK_Reservations_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservations_OwnerAssets" Association="Self.FK_Reservations_OwnerAssets">
+      <End Role="OwnerAssets" EntitySet="OwnerAssets" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
