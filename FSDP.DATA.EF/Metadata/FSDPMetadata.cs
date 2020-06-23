@@ -87,12 +87,13 @@ namespace FSDP.DATA.EF//.Metadata
         [Display(Name = "Active Member")]
         public bool IsActive { get; set; }
         [Display(Name = "Date Created")]
+        [DataType(DataType.Date)]
         public System.DateTime DateAdded { get; set; }
     }
     [MetadataType(typeof(OwnerAssetMetadata))]
     public partial class OwnerAsset
     {
-
+        
     }
     #endregion
     #region UserDetail Metadata

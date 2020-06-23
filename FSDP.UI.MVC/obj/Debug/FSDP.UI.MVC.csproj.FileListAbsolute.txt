@@ -103,3 +103,6 @@ C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.
 C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\obj\Debug\FSDP.UI.MVC.csproj.CopyComplete
 C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\obj\Debug\FSDP.UI.MVC.dll
 C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\obj\Debug\FSDP.UI.MVC.pdb
+C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\bin\FSDP.DATA.EF.dll
+C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\bin\FSDP.DATA.EF.pdb
+C:\Users\student\Documents\Visual Studio 2017\Projects\12_FSDP\FSDP\src\FSDP.UI.MVC\bin\FSDP.DATA.EF.dll.config

@@ -168,10 +168,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClassInfoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LevelsController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OwnerAssetsController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\UserDetailsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +197,7 @@
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\slicknav.min.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\Custom.css" />
     <Content Include="Content\fonts\ElegantIcons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\img\about\about-1.jpg" />
@@ -701,6 +708,36 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\UserDetails\Create.cshtml" />
+    <Content Include="Views\UserDetails\Delete.cshtml" />
+    <Content Include="Views\UserDetails\Details.cshtml" />
+    <Content Include="Views\UserDetails\Edit.cshtml" />
+    <Content Include="Views\UserDetails\Index.cshtml" />
+    <Content Include="Views\ClassInfoes\Create.cshtml" />
+    <Content Include="Views\ClassInfoes\Delete.cshtml" />
+    <Content Include="Views\ClassInfoes\Details.cshtml" />
+    <Content Include="Views\ClassInfoes\Edit.cshtml" />
+    <Content Include="Views\ClassInfoes\Index.cshtml" />
+    <Content Include="Views\OwnerAssets\Create.cshtml" />
+    <Content Include="Views\OwnerAssets\Delete.cshtml" />
+    <Content Include="Views\OwnerAssets\Details.cshtml" />
+    <Content Include="Views\OwnerAssets\Edit.cshtml" />
+    <Content Include="Views\OwnerAssets\Index.cshtml" />
+    <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\Delete.cshtml" />
+    <Content Include="Views\Reservations\Details.cshtml" />
+    <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Reservations\Index.cshtml" />
+    <Content Include="Views\Levels\Create.cshtml" />
+    <Content Include="Views\Levels\Delete.cshtml" />
+    <Content Include="Views\Levels\Details.cshtml" />
+    <Content Include="Views\Levels\Edit.cshtml" />
+    <Content Include="Views\Levels\Index.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\Locations\Delete.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

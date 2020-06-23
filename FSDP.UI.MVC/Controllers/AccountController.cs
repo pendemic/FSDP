@@ -1,4 +1,5 @@
-﻿using FSDP.UI.MVC.Models;
+﻿using FSDP.DATA.EF;
+using FSDP.UI.MVC.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -153,11 +154,22 @@ namespace FSDP.UI.MVC.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;
-                    return View("DisplayEmail");
+                    UserDetail newUser = new UserDetail();
+                    newUser.UserID = user.Id;
+                    newUser.FirstName = model.FirstName;
+                    newUser.LastName = model.LastName;
+                    FSDPEntities db = new FSDPEntities();
+                    db.UserDetails.Add(newUser);
+                    db.SaveChanges();
+
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    //ViewBag.Link = callbackUrl;
+                    UserManager.AddToRole(user.Id, "Owner");
+                    OwnerAsset id = new OwnerAsset();
+                    id.OwnerID = User.Identity.GetUserId();
+                    return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }

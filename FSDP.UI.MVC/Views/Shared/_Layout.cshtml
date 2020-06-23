@@ -8,7 +8,7 @@
     <meta name="keywords" content="Directing, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Zogin | Template</title>
+    <title>Learn to Break</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/Content/css/style.css" type="text/css">
+    <link href="~/Content/Custom.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -34,7 +35,7 @@
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu">
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="~/Content/img/logo.png" alt=""></a>
+            <a href=@Url.Action("Index", "Home")><img src="~/Content/img/logo.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__widget">
@@ -43,12 +44,12 @@
                 <li>WRITE US: OFFICE@EXAMPLE.COM</li>
                 <li>OPENING TIMES: MON - FRI: 9:00 - 19:00</li>
             </ul>
-            <a href="#" class="primary-btn">JOIN US</a>
+            <a href=@Url.Action("Register", "Account") class="primary-btn">Register</a>
         </div>
         <nav class="header__menu">
             <ul class="mobile-menu">
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="@Html.ActionLink("Home", "About")">About</a></li>
+                <li class="active"><a href=@Url.Action("Index", "Home")>Home</a></li>
+                <li><a href="@Url.Action("About", "Home")">About</a></li>
                 <li><a href="./classes.html">Classes</a></li>
                 <li>
                     <a href="#">Pages</a>
@@ -78,7 +79,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         <div class="header__logo">
-                            <a href="./index.html"><img src="~/Content/img/logo.png" alt=""></a>
+                            <a href=@Url.Action("Index", "Home")><img src="~/Content/img/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
@@ -88,7 +89,7 @@
                                 <li>WRITE US: OFFICE@EXAMPLE.COM</li>
                                 <li>OPENING TIMES: MON - FRI: 9:00 - 19:00</li>
                             </ul>
-                            <a href="#" class="primary-btn">JOIN US</a>
+                            <a href="@Url.Action("Register", "Account")" class="primary-btn">Register</a>
                         </div>
                     </div>
                 </div>
@@ -103,7 +104,7 @@
                     <div class="col-lg-9 col-md-9">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Home</a></li>
+                                <li class="active"><a href=@Url.Action("Index", "Home")>Home</a></li>
                                 <li><a href=@Url.Action("About", "Home")>About</a></li>
                                 <li><a href="./classes.html">Classes</a></li>
                                 <li>
@@ -117,6 +118,13 @@
                                 </li>
                                 <li><a href="./blog.html">Blog</a></li>
                                 <li><a href="./contact.html">Contact</a></li>
+                                @Html.Partial("_LoginPartial")
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a href="@Url.Action("Index","UsersAdmin")">Users</a></li>
+                                    <li><a href="@Url.Action("Index","RolesAdmin")">Roles</a></li>
+                                }
+
                             </ul>
                         </nav>
                     </div>
@@ -134,6 +142,7 @@
     </header>
     <!-- Header Section End -->
     @RenderSection("Index" , false)
+
     @RenderSection("Nav", false)
     <!-- Hero Section Begin -->
     @RenderBody()
