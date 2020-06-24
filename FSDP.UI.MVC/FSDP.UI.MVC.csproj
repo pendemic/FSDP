@@ -271,6 +271,7 @@
     <Content Include="Content\img\instructor\instructor-3.jpg" />
     <Content Include="Content\img\instructor\instructor-4.jpg" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\NoImage.png" />
     <Content Include="Content\img\pricing\price-bg-1.png" />
     <Content Include="Content\img\pricing\price-bg-2.png" />
     <Content Include="Content\img\pricing\price-bg-3.png" />

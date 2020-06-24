@@ -53,10 +53,27 @@ namespace FSDP.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OwnerAssetID,AssetName,OwnerID,AssetPhoto,LevelID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset)
+        public ActionResult Create([Bind(Include = "OwnerAssetID,AssetName,OwnerID,AssetPhoto,LevelID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase assetPhoto)
         {
             if (ModelState.IsValid)
             {
+                string imgName = "NoImage.png";
+                if (assetPhoto != null)
+                {
+                    imgName = assetPhoto.FileName;
+                    string ext = imgName.Substring(imgName.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()) && (assetPhoto.ContentLength <= 4194304))
+                    {
+                        imgName = Guid.NewGuid() + ext;
+                        assetPhoto.SaveAs(Server.MapPath("~/Content/img/" + imgName));
+                    }
+                    else
+                    {
+                        imgName = "NoImage.png";
+                    }
+                }
+                ownerAsset.AssetPhoto = imgName;
                 ownerAsset.DateAdded = DateTime.Now;
                 ownerAsset.OwnerID = User.Identity.GetUserId();
                 db.OwnerAssets.Add(ownerAsset);
@@ -91,10 +108,26 @@ namespace FSDP.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OwnerAssetID,AssetName,OwnerID,AssetPhoto,LevelID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset)
+        public ActionResult Edit([Bind(Include = "OwnerAssetID,AssetName,OwnerID,AssetPhoto,LevelID,SpecialNotes,IsActive,DateAdded")] OwnerAsset ownerAsset, HttpPostedFileBase assetPhoto)
         {
             if (ModelState.IsValid)
             {
+                if (assetPhoto != null)
+                {
+                    string imgName = assetPhoto.FileName;
+                    string ext = imgName.Substring(imgName.LastIndexOf('.'));
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+                    if (goodExts.Contains(ext.ToLower()) && (assetPhoto.ContentLength <= 4194304))
+                    {
+                        imgName = Guid.NewGuid() + ext;
+                        assetPhoto.SaveAs(Server.MapPath("~/Content/img/" + imgName));
+                        if (ownerAsset.AssetPhoto != null && ownerAsset.AssetPhoto != "NoImage.png")
+                        {
+                            System.IO.File.Delete(Server.MapPath("~/Content/Images/" + Session["currentImage"].ToString()));
+                        }
+                        ownerAsset.AssetPhoto = imgName;
+                    }
+                }
                 db.Entry(ownerAsset).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -125,6 +158,10 @@ namespace FSDP.UI.MVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             OwnerAsset ownerAsset = db.OwnerAssets.Find(id);
+            //if (ownerAsset.AssetPhoto != null && ownerAsset.AssetPhoto != "NoImage.png")
+            //{
+            //    System.IO.File.Delete(Server.MapPath("~/Content/Images/" + Session["currentImage"].ToString()));
+            //}
             db.OwnerAssets.Remove(ownerAsset);
             db.SaveChanges();
             return RedirectToAction("Index");
