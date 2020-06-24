@@ -88,9 +88,12 @@
         </td>
 
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ReservationID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID }) 
+            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                <div>|  @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })</div>
+            }
+
         </td>
     </tr>
     }

@@ -55,9 +55,12 @@
         </div>
     </section>
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -73,7 +76,7 @@
             @Html.DisplayNameFor(model => model.ClassLimit)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Level.LevelName)
+            Level
         </th>
         <th></th>
     </tr>
@@ -97,9 +100,12 @@
                 @Html.DisplayFor(modelItem => item.Level.LevelName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ClassID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ClassID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ClassID })
+                @Html.ActionLink("Details", "Details", new { id = item.ClassID })
+                @if (User.IsInRole("Admin"))
+                {
+                    <div>| @Html.ActionLink("Edit", "Edit", new { id = item.ClassID }) |</div>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ClassID })
+                }
             </td>
         </tr>
     }
