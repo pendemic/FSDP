@@ -19,7 +19,7 @@ namespace FSDP.UI.MVC.Controllers
         {
             return View(db.Levels.ToList());
         }
-
+        //Delete View
         // GET: Levels/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +34,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(level);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Levels/Create
         public ActionResult Create()
         {
@@ -57,7 +57,7 @@ namespace FSDP.UI.MVC.Controllers
 
             return View(level);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Levels/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -88,7 +88,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(level);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Levels/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,7 +103,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(level);
         }
-
+        [Authorize(Roles = "Admin")]
         // POST: Levels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

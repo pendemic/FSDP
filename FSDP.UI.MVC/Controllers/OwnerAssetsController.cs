@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FSDP.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace FSDP.UI.MVC.Controllers
 {
@@ -15,12 +16,15 @@ namespace FSDP.UI.MVC.Controllers
         private FSDPEntities db = new FSDPEntities();
 
         // GET: OwnerAssets
+        [Authorize(Roles = "Admin, Owner")]
         public ActionResult Index()
         {
-            var ownerAssets = db.OwnerAssets.Include(o => o.Level).Include(o => o.UserDetail);
-            return View(ownerAssets.ToList());
+            string user = User.Identity.GetUserId();
+            var asset = db.OwnerAssets.Where(a => a.OwnerID == user).Include(r => r.Reservations);
+            
+            return View(asset.ToList());
         }
-
+        [Authorize(Roles = "Admin, Owner")]
         // GET: OwnerAssets/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +39,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(ownerAsset);
         }
-
+        [Authorize(Roles = "Admin, Owner")]
         // GET: OwnerAssets/Create
         public ActionResult Create()
         {
@@ -53,7 +57,8 @@ namespace FSDP.UI.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                ownerAsset.DateAdded = @DateTime.Now;
+                ownerAsset.DateAdded = DateTime.Now;
+                ownerAsset.OwnerID = User.Identity.GetUserId();
                 db.OwnerAssets.Add(ownerAsset);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -63,7 +68,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.OwnerID = new SelectList(db.UserDetails, "UserID", "FirstName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
-
+        [Authorize(Roles = "Admin, Owner")]
         // GET: OwnerAssets/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -98,7 +103,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.OwnerID = new SelectList(db.UserDetails, "UserID", "FirstName", ownerAsset.OwnerID);
             return View(ownerAsset);
         }
-
+        [Authorize(Roles = "Admin, Owner")]
         // GET: OwnerAssets/Delete/5
         public ActionResult Delete(int? id)
         {

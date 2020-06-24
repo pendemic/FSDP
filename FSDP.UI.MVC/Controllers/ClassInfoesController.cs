@@ -20,7 +20,7 @@ namespace FSDP.UI.MVC.Controllers
             var classInfoes = db.ClassInfoes.Include(c => c.Level);
             return View(classInfoes.ToList());
         }
-
+        //Remove View
         // GET: ClassInfoes/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +35,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(classInfo);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: ClassInfoes/Create
         public ActionResult Create()
         {
@@ -60,7 +60,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.LevelRequired = new SelectList(db.Levels, "LevelID", "LevelName", classInfo.LevelRequired);
             return View(classInfo);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: ClassInfoes/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -93,7 +93,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.LevelRequired = new SelectList(db.Levels, "LevelID", "LevelName", classInfo.LevelRequired);
             return View(classInfo);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: ClassInfoes/Delete/5
         public ActionResult Delete(int? id)
         {

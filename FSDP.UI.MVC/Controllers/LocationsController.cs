@@ -19,7 +19,7 @@ namespace FSDP.UI.MVC.Controllers
         {
             return View(db.Locations.ToList());
         }
-
+        //Delete View
         // GET: Locations/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +34,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(location);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Create
         public ActionResult Create()
         {
@@ -57,7 +57,7 @@ namespace FSDP.UI.MVC.Controllers
 
             return View(location);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -88,7 +88,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(location);
         }
-
+        [Authorize(Roles = "Admin")]
         // GET: Locations/Delete/5
         public ActionResult Delete(int? id)
         {

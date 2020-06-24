@@ -72,7 +72,7 @@ namespace FSDP.DATA.EF//.Metadata
         [StringLength(50, ErrorMessage = "Max 50 Characters")]
         [Display(Name = "Member Name")]
         public string AssetName { get; set; }
-        [Required(ErrorMessage = "Please enter the Owner ID")]
+        //[Required(ErrorMessage = "Please enter the Owner ID")]
         [StringLength(128, ErrorMessage = "Max 128 Characters")]
         public string OwnerID { get; set; }
         [StringLength(50, ErrorMessage = "Max 50 Characters")]

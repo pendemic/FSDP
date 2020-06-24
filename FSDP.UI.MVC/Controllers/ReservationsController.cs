@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FSDP.DATA.EF;
+using Microsoft.AspNet.Identity;
 
 namespace FSDP.UI.MVC.Controllers
 {
@@ -17,8 +18,14 @@ namespace FSDP.UI.MVC.Controllers
         // GET: Reservations
         public ActionResult Index()
         {
-            var reservations = db.Reservations.Include(r => r.ClassInfo).Include(r => r.Location).Include(r => r.OwnerAsset);
-            return View(reservations.ToList());
+            if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                var reservations = db.Reservations.Include(r => r.ClassInfo).Include(r => r.Location).Include(r => r.OwnerAsset);
+                return View(reservations.ToList());
+            }
+            string user = User.Identity.GetUserId();
+            var asset = db.Reservations.Where(a => a.OwnerAsset.OwnerID == user);
+            return View(asset.ToList());
         }
 
         // GET: Reservations/Details/5
@@ -35,7 +42,7 @@ namespace FSDP.UI.MVC.Controllers
             }
             return View(reservation);
         }
-
+        [Authorize(Roles = "Admin, Employee, Owner")]
         // GET: Reservations/Create
         public ActionResult Create()
         {
@@ -52,19 +59,36 @@ namespace FSDP.UI.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ReservationID,OwnerAssetID,LocationID,ClassID")] Reservation reservation)
         {
+            int nbrRes = db.Reservations.Where(c => c.ClassID == reservation.ClassID).Count();
+            int nbrMax = db.ClassInfoes.Where(m => m.ClassID == reservation.ClassID).FirstOrDefault().ClassLimit;
             if (ModelState.IsValid)
             {
-                db.Reservations.Add(reservation);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                //Add functionality for class restrictions
+                if (db.Reservations.Where(o => o.OwnerAssetID == reservation.OwnerAssetID).Count() > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                if (nbrRes < nbrMax )
+                {
+                    db.Reservations.Add(reservation);
+                    db.SaveChanges();
+                    
+                    return RedirectToAction("Index");
+                }
+                
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+                
             }
-
+            
             ViewBag.ClassID = new SelectList(db.ClassInfoes, "ClassID", "ClassName", reservation.ClassID);
             ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", reservation.LocationID);
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName", reservation.OwnerAssetID);
             return View(reservation);
         }
-
+        [Authorize(Roles = "Admin, Employee, Owner")]
         // GET: Reservations/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -101,7 +125,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName", reservation.OwnerAssetID);
             return View(reservation);
         }
-
+        [Authorize(Roles = "Admin, Employee, Owner")]
         // GET: Reservations/Delete/5
         public ActionResult Delete(int? id)
         {
