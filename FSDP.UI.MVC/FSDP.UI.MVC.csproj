@@ -201,6 +201,12 @@
     <Content Include="Content\Custom.css" />
     <Content Include="Content\fonts\ElegantIcons.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\004-breakdance.png" />
+    <Content Include="Content\img\006-breakdance.png" />
+    <Content Include="Content\img\010-breakdance.png" />
+    <Content Include="Content\img\016-breakdance.png" />
+    <Content Include="Content\img\021-hip hop.png" />
+    <Content Include="Content\img\023-breakdance.png" />
     <Content Include="Content\img\about\about-1.jpg" />
     <Content Include="Content\img\about\about-2.jpg" />
     <Content Include="Content\img\about\about-3.jpg" />
@@ -211,6 +217,7 @@
     <Content Include="Content\img\about\af-4.png" />
     <Content Include="Content\img\about\background-left.png" />
     <Content Include="Content\img\about\background-right.png" />
+    <Content Include="Content\img\bannerbreak.jpg" />
     <Content Include="Content\img\blog\blog-1.jpg" />
     <Content Include="Content\img\blog\blog-2.jpg" />
     <Content Include="Content\img\blog\blog-3.jpg" />
@@ -225,6 +232,13 @@
     <Content Include="Content\img\blog\details\blog-large.jpg" />
     <Content Include="Content\img\blog\details\blog-posted.png" />
     <Content Include="Content\img\breadcrumb.jpg" />
+    <Content Include="Content\img\break1.jpg" />
+    <Content Include="Content\img\break2.jpg" />
+    <Content Include="Content\img\break3.jpg" />
+    <Content Include="Content\img\breakbg.jpg" />
+    <Content Include="Content\img\BreakTime.jpg" />
+    <Content Include="Content\img\breaktimefooter-logo.png" />
+    <Content Include="Content\img\breaktimelogo.png" />
     <Content Include="Content\img\chooseus\choose-1.png" />
     <Content Include="Content\img\chooseus\choose-2.png" />
     <Content Include="Content\img\chooseus\choose-3.png" />

@@ -75,27 +75,39 @@
     <!-- Header Section Begin -->
     <header class="header">
         <div class="header__top">
-            <div class="container">
+            <div class="container about-menu">
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         <div class="header__logo">
-                            <a href=@Url.Action("Index", "Home")><img src="~/Content/img/logo.png" alt=""></a>
+                            <a href=@Url.Action("Index", "Home")><img src="~/Content/img/breaktimelogo.png" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="header__logo">
-                            @using (Html.BeginForm("ReservationSearch", "Filters", FormMethod.Get, new { @class = "form-horizontal" }))
-                            {
-                                <input class="search" placeholder="Search by Account Owner or Member " type="text" name="searchFilter">
-                                <input type="submit" value="Search" class="btn search-btn" />
-                            }
-                                            </div>
-                    </div>
-                    <div class="col-lg-5 col-md-5">
-                        <div class="header__top__widget">
-                            <a href="@Url.Action("Register", "Account")" class="primary-btn">Register</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                    {
+                        <div class="col-lg-3 col-md-3">
+                            <div class="header__logo">
+                                @using (Html.BeginForm("ReservationSearch", "Filters", FormMethod.Get, new { @class = "form-horizontal" }))
+                                {
+                                    <input class="search" placeholder="Search by Account Owner or Member " type="text" name="searchFilter">
+                                    <input type="submit" value="Search" class="btn search-btn" />
+                                }
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="header__top__widget">
+                                <a href="@Url.Action("Register", "Account")" class="primary-btn">Register</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-9 col-md-9">
+                            <div class="header__top__widget">
+                                <a href="@Url.Action("Register", "Account")" class="primary-btn">Register</a>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 <div class="canvas__open">
                     <i class="fa fa-bars"></i>
@@ -108,20 +120,22 @@
                     <div class="col-lg-9 col-md-9">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href=@Url.Action("Index", "Home")>Home</a></li>
+                                <li><a href=@Url.Action("Index", "Home")>Home</a></li>
                                 <li><a href=@Url.Action("About", "Home")>About</a></li>
-                                <li><a href="./classes.html">Classes</a></li>
-                                <li>
-                                    <a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="./classes-details.html">Classes Details</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./pricing.html">Pricing</a></li>
-                                        <li><a href="./faq.html">Faq</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Contact</a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                                    <li>
+                                        <a href="#">Classes</a>
+                                        <ul class="dropdown">
+                                            <li><a href=@Url.Action("Index", "ClassInfoes")>Class Info</a></li>
+                                            <li><a href=@Url.Action("Index", "Reservations")>Reservations</a></li>
+                                            <li><a href=@Url.Action("Index", "Locations")>Locations</a></li>
+                                            <li><a href=@Url.Action("Index", "Levels")>Level Guide</a></li>
+                                        </ul>
+                                    </li>
+                                }
+
                                 @Html.Partial("_LoginPartial")
                                 @if (User.IsInRole("Admin"))
                                 {
@@ -132,22 +146,37 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="header__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
+                    @*<div class="col-lg-3 col-md-3">
+                            <div class="header__social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
     </header>
     <!-- Header Section End -->
-    @RenderSection("Index" , false)
-
-    @RenderSection("Nav", false)
+    <!-- Breadcrumb Begin -->
+    <section class="breadcrumb-option set-bg" data-setbg="/Content/img/bannerbreak.jpg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h2>@ViewBag.Title</h2>
+                        <div class="breadcrumb__widget">
+                            <a href=@Url.Action("Index", "Home")>Home</a>
+                            <span>@ViewBag.Title</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Header Section End -->
+    @*@RenderSection("Index" , false)*@
     <!-- Hero Section Begin -->
     @RenderBody()
     <!-- Testimonial Section End -->
@@ -157,7 +186,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer__about">
-                        <img src="~/Content/img/footer-logo.png" alt="">
+                        <img src="~/Content/img/breaktimefooter-logo.png" alt="Logo">
                         <ul>
                             <li><i class="fa fa-clock-o"></i> Mon - Fri: 6:30am - 07:45pm</li>
                             <li><i class="fa fa-clock-o"></i> Sat - Sun: 8:30am - 05:45pm</li>

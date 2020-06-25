@@ -8,3 +8,15 @@
     background-color: #5768AD;
     color: white;
 }
+.about-menu{
+    margin-bottom: 30px;
+}
+.header__menu {
+    margin-top: -45px;
+    position: absolute;
+}
+.video{
+    width: 850px;
+    margin-left: 330px;
+    text-align: center;
+}
