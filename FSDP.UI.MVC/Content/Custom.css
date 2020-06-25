@@ -1,3 +1,10 @@
 ﻿.hero {
     margin-top: -100px;
 }
+.search{
+    width: 350px;
+}
+.search-btn {
+    background-color: #5768AD;
+    color: white;
+}

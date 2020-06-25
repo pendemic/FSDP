@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassInfoesController.cs" />
+    <Compile Include="Controllers\FiltersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LevelsController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -739,6 +740,10 @@
     <Content Include="Views\OwnerAssets\Details.cshtml" />
     <Content Include="Views\OwnerAssets\Edit.cshtml" />
     <Content Include="Views\OwnerAssets\Index.cshtml" />
+    <Content Include="Views\Filters\Details.cshtml" />
+    <Content Include="Views\Filters\ReservationSearch.cshtml" />
+    <Content Include="Views\Filters\Delete.cshtml" />
+    <Content Include="Views\Filters\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -82,13 +82,17 @@
                             <a href=@Url.Action("Index", "Home")><img src="~/Content/img/logo.png" alt=""></a>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="header__logo">
+                            @using (Html.BeginForm("ReservationSearch", "Filters", FormMethod.Get, new { @class = "form-horizontal" }))
+                            {
+                                <input class="search" placeholder="Search by Account Owner or Member " type="text" name="searchFilter">
+                                <input type="submit" value="Search" class="btn search-btn" />
+                            }
+                                            </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5">
                         <div class="header__top__widget">
-                            <ul>
-                                <li>CALL US: + 1 800-567-8990</li>
-                                <li>WRITE US: OFFICE@EXAMPLE.COM</li>
-                                <li>OPENING TIMES: MON - FRI: 9:00 - 19:00</li>
-                            </ul>
                             <a href="@Url.Action("Register", "Account")" class="primary-btn">Register</a>
                         </div>
                     </div>
