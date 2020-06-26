@@ -20,6 +20,21 @@ namespace FSDP.UI.MVC.Controllers
             var classInfoes = db.ClassInfoes.Include(c => c.Level);
             return View(classInfoes.ToList());
         }
+        public ActionResult BegIndex()
+        {
+            var begClass = db.ClassInfoes.Where(c => c.LevelRequired == 1);
+            return View(begClass.ToList());
+        }
+        public ActionResult IntIndex()
+        {
+            var intClass = db.ClassInfoes.Where(c => c.LevelRequired == 2);
+            return View(intClass.ToList());
+        }
+        public ActionResult AdvIndex()
+        {
+            var advClass = db.ClassInfoes.Where(c => c.LevelRequired == 3);
+            return View(advClass.ToList());
+        }
         //Remove View
         // GET: ClassInfoes/Details/5
         public ActionResult Details(int? id)

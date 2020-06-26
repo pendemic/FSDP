@@ -1,13 +1,12 @@
 ﻿@model FSDP.DATA.EF.Reservation
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "New Reservation";
 }
 
-<h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Reservations", FormMethod.Post, new { @class="appointment__form"}))
 {
     @Html.AntiForgeryToken()
 
@@ -22,7 +21,6 @@
                         </div>
                     </div>
                 </div>
-                <form action="#" class="appointment__form">
                     <div class="row">
                         <div class="col-lg-12">
                             @Html.DropDownList("OwnerAssetID", null, htmlAttributes: new { @class = "col-lg-12", @placeholder = "Member Name" })
@@ -40,7 +38,6 @@
                             <input type="submit" value="Create Reservation" class="btn btn-light" />
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </section>

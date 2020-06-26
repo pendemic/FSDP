@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FSDP.DATA.EF.ClassInfo>
+@{
+    ViewBag.Title = "Beginner Classes";
+}
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassLimit)
+        </th>
+        <th>
+            Level
+        </th>
+        <th></th>
+    </tr>*@
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","ClassInfoes")">All Classes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Beginner</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("IntIndex","ClassInfoes")">Intermediate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("AdvIndex","ClassInfoes")">Advanced</a>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.ClassName)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    @Html.ActionLink("Details", "Details", new { id = item.ClassID })
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <div>| @Html.ActionLink("Edit", "Edit", new { id = item.ClassID }) |</div>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ClassID })
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -50,18 +50,26 @@
             <ul class="mobile-menu">
                 <li class="active"><a href=@Url.Action("Index", "Home")>Home</a></li>
                 <li><a href="@Url.Action("About", "Home")">About</a></li>
-                <li><a href="./classes.html">Classes</a></li>
-                <li>
-                    <a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./classes-details.html">Classes Details</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                        <li><a href="./pricing.html">Pricing</a></li>
-                        <li><a href="./faq.html">Faq</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                    <li>
+                        <a href="#">Classes</a>
+                        <ul class="dropdown">
+                            <li><a href=@Url.Action("Index", "ClassInfoes")>Class Info</a></li>
+                            <li><a href=@Url.Action("Index", "Reservations")>Reservations</a></li>
+                            <li><a href=@Url.Action("Index", "Locations")>Locations</a></li>
+                            <li><a href=@Url.Action("Index", "Levels")>Level Guide</a></li>
+                        </ul>
+                    </li>
+                }
+
+                @Html.Partial("_LoginPartial")
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a href="@Url.Action("Index","UsersAdmin")">Users</a></li>
+                    <li><a href="@Url.Action("Index","RolesAdmin")">Roles</a></li>
+                }
             </ul>
         </nav>
         <div class="offcanvas__social">
@@ -191,10 +199,6 @@
                             <li><i class="fa fa-clock-o"></i> Mon - Fri: 6:30am - 07:45pm</li>
                             <li><i class="fa fa-clock-o"></i> Sat - Sun: 8:30am - 05:45pm</li>
                         </ul>
-                        <form action="#" class="subscribe-form">
-                            <input type="text" placeholder="Your Email">
-                            <button type="submit"><i class="fa fa-send"></i></button>
-                        </form>
                     </div>
                 </div>
                 <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
@@ -222,14 +226,21 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h5>Contact Us</h5>
-                        <ul class="footer-address">
-                            <li><i class="fa fa-phone"></i> (01) 436 8888</li>
-                            <li><i class="fa fa-envelope"></i> hello@zogin.com</li>
-                            <li><i class="fa fa-location-arrow"></i> 828 Granville Lights Suite 466</li>
-                        </ul>
-                    </div>
+                        <div class="footer__widget">
+                            <h5>Contact Us</h5>
+                            @*<ul class="footer-address">
+                    <li><i class="fa fa-phone"></i> (01) 436 8888</li>
+                    <li><i class="fa fa-envelope"></i> hello@zogin.com</li>
+                    <li><i class="fa fa-location-arrow"></i> 828 Granville Lights Suite 466</li>
+                </ul>*@
+                            <div id="contactForm">
+                                @Html.Partial("~/Views/Home/ContactAjax.cshtml", new FSDP.UI.MVC.Models.ContactViewModel())
+                            </div>
+                            <div id="contactConfirm" style="display:none">
+                                @Html.Partial("~/Views/Home/EmailConfirm.cshtml", new FSDP.UI.MVC.Models.ContactViewModel())
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="footer__copyright">
@@ -265,7 +276,25 @@
     <script src="~/Content/js/jquery.slicknav.js"></script>
     <script src="~/Content/js/owl.carousel.min.js"></script>
     <script src="~/Content/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
     @RenderSection("scripts", false)
+    <script>
+        $("#ContactCreateForm").submit(function (e) {
+            var formData = $(this).serializeArray();
+            e.preventDefault();
+            $.ajax({
+                url: '@Url.Action("ContactAjax", "Home")',
+                type: 'POST',
+                data: formData,
+                datatype: 'json',
+                success: function (data) {
+                    $("#contactForm").hide();
+                    $("#contactConfirm").show();
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

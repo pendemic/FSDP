@@ -63,6 +63,11 @@ namespace FSDP.UI.MVC.Controllers
             int nbrMax = db.ClassInfoes.Where(m => m.ClassID == reservation.ClassID).FirstOrDefault().ClassLimit;
             if (ModelState.IsValid)
             {
+                if (User.IsInRole("Admin"))
+                {
+                    db.Reservations.Add(reservation);
+                    db.SaveChanges();
+                }
                 //Add functionality for class restrictions
                 if (db.Reservations.Where(o => o.OwnerAssetID == reservation.OwnerAssetID).Count() > 0)
                 {

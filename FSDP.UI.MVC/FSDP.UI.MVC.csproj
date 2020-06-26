@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -758,6 +759,11 @@
     <Content Include="Views\Filters\ReservationSearch.cshtml" />
     <Content Include="Views\Filters\Delete.cshtml" />
     <Content Include="Views\Filters\Edit.cshtml" />
+    <Content Include="Views\ClassInfoes\BegIndex.cshtml" />
+    <Content Include="Views\ClassInfoes\IntIndex.cshtml" />
+    <Content Include="Views\ClassInfoes\AdvIndex.cshtml" />
+    <Content Include="Views\Home\ContactAjax.cshtml" />
+    <Content Include="Views\Home\EmailConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
