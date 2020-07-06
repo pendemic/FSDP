@@ -25,6 +25,7 @@
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="FSDPModel.Location">
         <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="InstructorPhoto" ColumnName="InstructorPhoto" />
           <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="LocationName" ColumnName="LocationName" />
           <ScalarProperty Name="InstructorName" ColumnName="InstructorName" />

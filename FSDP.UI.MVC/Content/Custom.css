@@ -19,13 +19,13 @@
     margin-top: 20px;
     text-align: center;
 }
-.card{
+/*.classinfo{
     border: 2px solid black;
-}
-.card-body {
+}*/
+/*.cards {
     border: 2px solid black;
     margin: 5px;
-}
+}*/
 .appointment{
     margin-top: 20px;
 }
@@ -39,4 +39,21 @@
 #ContactCreateForm textarea {
     color: #999999;
     background: rgba(250, 250, 250, 0.1);
+}
+.card-img-top{
+    padding-top: 5px;
+    height: 275px;
+    width: 300px;
+    text-align:center;
+    margin: 0 auto 0 auto;
+
+}
+.location{
+    text-align: center;
+    margin: 20px auto 20px auto;
+}
+.asset{
+    margin-left: auto;
+    margin-right:auto;
+    text-align:center;
 }

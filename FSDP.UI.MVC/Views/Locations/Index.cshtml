@@ -9,7 +9,7 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 }
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.LocationName)
@@ -30,37 +30,27 @@
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
         <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LocationName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstructorName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <div>@Html.ActionLink("Edit", "Edit", new { id = item.LocationID }) |</div>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
-                }
-            </td>
-        </tr>
-    }
-
-</table>
+    </tr>*@
+    <div class="row location">
+        @foreach (var item in Model)
+        {
+            <div class="card col-md-3 col-lg-4 location" style="width: 18rem;">
+                <img class="card-img-top" src="~/Content/img/@item.InstructorPhoto" alt="@item.InstructorName">
+                <div class="card-body">
+                    <h4>@item.InstructorName</h4>
+                    <h5 class="card-title">@item.LocationName</h5>
+                    <p class="card-text">@item.Address</p>
+                    <p class="card-text"> @item.City @item.State, @item.ZipCode</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div>@Html.ActionLink("Edit", "Edit", new { id = item.LocationID }) |</div>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.LocationID })
+                        }
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>

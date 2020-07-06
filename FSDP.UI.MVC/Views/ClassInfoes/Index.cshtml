@@ -28,7 +28,7 @@
         </th>
         <th></th>
     </tr>*@
-    <div class="card text-center">
+    <div class="card text-center classinfo">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
@@ -48,7 +48,7 @@
         <div class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-6 col-lg-4"><div class="card-body">
+                <div class="col-md-6 col-lg-4"><div class="card-body cards">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.ClassName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
                     @Html.ActionLink("Details", "Details", new { id = item.ClassID })
