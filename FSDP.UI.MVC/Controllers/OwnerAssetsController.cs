@@ -16,7 +16,7 @@ namespace FSDP.UI.MVC.Controllers
         private FSDPEntities db = new FSDPEntities();
 
         // GET: OwnerAssets
-        [Authorize(Roles = "Admin, Owner")]
+        [Authorize(Roles = "Admin, Owner, Employee")]
         public ActionResult Index()
         {
             string user = User.Identity.GetUserId();
@@ -24,7 +24,11 @@ namespace FSDP.UI.MVC.Controllers
             
             return View(asset.ToList());
         }
-        [Authorize(Roles = "Admin, Owner")]
+        public ActionResult Members()
+        {
+            return View(db.OwnerAssets.ToList());
+        }
+        [Authorize(Roles = "Admin, Owner, Employee")]
         // GET: OwnerAssets/Details/5
         public ActionResult Details(int? id)
         {

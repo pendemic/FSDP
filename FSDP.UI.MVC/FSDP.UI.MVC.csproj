@@ -764,6 +764,7 @@
     <Content Include="Views\ClassInfoes\AdvIndex.cshtml" />
     <Content Include="Views\Home\ContactAjax.cshtml" />
     <Content Include="Views\Home\EmailConfirm.cshtml" />
+    <Content Include="Views\OwnerAssets\Members.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

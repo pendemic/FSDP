@@ -26,9 +26,11 @@ namespace FSDP.DATA.EF
         public System.DateTime ClassDate { get; set; }
         public int LevelRequired { get; set; }
         public byte ClassLimit { get; set; }
+        public int LocationID { get; set; }
     
         public virtual Level Level { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

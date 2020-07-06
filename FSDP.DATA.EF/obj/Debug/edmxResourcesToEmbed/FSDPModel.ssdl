@@ -10,6 +10,7 @@
     <Property Name="ClassDate" Type="date" Nullable="false" />
     <Property Name="LevelRequired" Type="int" Nullable="false" />
     <Property Name="ClassLimit" Type="tinyint" Nullable="false" />
+    <Property Name="LocationID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Level">
     <Key>
@@ -71,6 +72,18 @@
       </Principal>
       <Dependent Role="ClassInfo">
         <PropertyRef Name="LevelRequired" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassInfo_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="ClassInfo" Type="Self.ClassInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="ClassInfo">
+        <PropertyRef Name="LocationID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -143,6 +156,10 @@
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ClassInfo_Level" Association="Self.FK_ClassInfo_Level">
       <End Role="Level" EntitySet="Level" />
+      <End Role="ClassInfo" EntitySet="ClassInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassInfo_Locations" Association="Self.FK_ClassInfo_Locations">
+      <End Role="Locations" EntitySet="Locations" />
       <End Role="ClassInfo" EntitySet="ClassInfo" />
     </AssociationSet>
     <AssociationSet Name="FK_OwnerAssets_Level" Association="Self.FK_OwnerAssets_Level">

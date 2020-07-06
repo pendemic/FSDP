@@ -52,7 +52,14 @@
                 <li><a href="@Url.Action("About", "Home")">About</a></li>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                    if (User.IsInRole("Owner"))
+                    {
+                        <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                    }
+                    else
+                    {
+                        <li><a href=@Url.Action("Members", "OwnerAssets")>Members</a></li>
+                    }
                     <li>
                         <a href="#">Classes</a>
                         <ul class="dropdown">
@@ -132,7 +139,14 @@
                                 <li><a href=@Url.Action("About", "Home")>About</a></li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                                    if (User.IsInRole("Owner"))
+                                    {
+                                        <li><a href=@Url.Action("Index", "OwnerAssets")>Your Account</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href=@Url.Action("Members", "OwnerAssets")>Members</a></li>
+                                    }
                                     <li>
                                         <a href="#">Classes</a>
                                         <ul class="dropdown">

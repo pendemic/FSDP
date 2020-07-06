@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FSDP.DATA.EF.OwnerAsset>
+@{
+    ViewBag.Title = "Members";
+}
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetPhoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialNotes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level.LevelName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDetail.FirstName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetPhoto)
+                    <img src="~/Content/img/@item.AssetPhoto" alt="@item.AssetName" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecialNotes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level.LevelName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserDetail.FirstName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.OwnerAssetID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OwnerAssetID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.OwnerAssetID })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-12 col-lg-4 asset" style="width: 18rem;">
+            <img class="card-img-top" src="~/Content/img/@item.AssetPhoto" alt="@item.AssetName">
+            <p class="card-body asset">
+                <h5 class="card-title">@item.AssetName</h5>
+            <p class="card-text">@item.Level.LevelName Level</p>
+            <p>
+                @Html.ActionLink("Details", "Details", new { id = item.OwnerAssetID })
+                @if (User.IsInRole("Admin"))
+                {
+                    <div> | @Html.ActionLink("Edit", "Edit", new { id = item.OwnerAssetID })</div>
+                    <div> | @Html.ActionLink("Delete", "Delete", new { id = item.OwnerAssetID })</div>
+}
+            </p>
+
+        </div>
+
+    }
+</div>

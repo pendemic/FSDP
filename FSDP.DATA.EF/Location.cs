@@ -18,6 +18,7 @@ namespace FSDP.DATA.EF
         public Location()
         {
             this.Reservations = new HashSet<Reservation>();
+            this.ClassInfoes = new HashSet<ClassInfo>();
         }
     
         public int LocationID { get; set; }
@@ -31,5 +32,7 @@ namespace FSDP.DATA.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservations { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClassInfo> ClassInfoes { get; set; }
     }
 }

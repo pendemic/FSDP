@@ -3,72 +3,29 @@
 @{
     ViewBag.Title = "Details";
 }
+<div class="card col-md-12 col-lg-4" style="width: 25rem;">
+    <div class="asset">
+        <h5 class="card-title">Account Owner: @Html.DisplayFor(model => model.UserDetail.FullName)</h5>
+    </div>
+    <img class="card-img-top" src="~/Content/img/@Model.AssetPhoto" alt="@Model.AssetName">
+    <div class="card-body asset">
+        <h5 class="card-title">@Model.AssetName</h5>
+        <p class="card-text">Created at: @Model.DateAdded <br />@Model.Level.LevelName Level</p>
+        <p>
+            @Html.DisplayNameFor(model => model.IsActive) | @Html.DisplayFor(model => model.IsActive) <br />
+            Notes: @Html.DisplayFor(model => model.SpecialNotes)
+        </p>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerAssetID }) |
+            @if (User.IsInRole("Owner"))
+            {
+                @Html.ActionLink("Back to List", "Index")
+            }
+            else
+            {
+                @Html.ActionLink("Back to List", "Members")
+            }
+        </p>
 
-<h2>Details</h2>
-
-<div>
-    <h4>OwnerAsset</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssetName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssetPhoto)
-        </dt>
-
-        <dd>
-            <img src="~/Content/images/@Model.AssetPhoto" alt="@Model.AssetName" />
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpecialNotes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpecialNotes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateAdded)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Level.LevelName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Level.LevelName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserDetail.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserDetail.FirstName)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.OwnerAssetID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

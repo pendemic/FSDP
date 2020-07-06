@@ -51,7 +51,6 @@
                 <div class="card-body">
                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.ClassName)</h5>
                     <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-                    @Html.ActionLink("Details", "Details", new { id = item.ClassID })
                     @if (User.IsInRole("Admin"))
                     {
                         <div>| @Html.ActionLink("Edit", "Edit", new { id = item.ClassID }) |</div>

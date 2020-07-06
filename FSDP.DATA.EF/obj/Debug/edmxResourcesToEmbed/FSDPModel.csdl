@@ -12,6 +12,8 @@
     <Property Name="ClassLimit" Type="Byte" Nullable="false" />
     <NavigationProperty Name="Level" Relationship="Self.FK_ClassInfo_Level" FromRole="ClassInfo" ToRole="Level" />
     <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_ClassInfo" FromRole="ClassInfo" ToRole="Reservations" />
+    <Property Name="LocationID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="FSDPModel.FK_ClassInfo_Locations" FromRole="ClassInfo" ToRole="Location" />
   </EntityType>
   <EntityType Name="Level">
     <Key>
@@ -36,6 +38,7 @@
     <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_Locations" FromRole="Locations" ToRole="Reservations" />
     <Property Name="InstructorPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClassInfoes" Relationship="FSDPModel.FK_ClassInfo_Locations" FromRole="Location" ToRole="ClassInfo" />
   </EntityType>
   <EntityType Name="OwnerAsset">
     <Key>
@@ -177,5 +180,21 @@
       <End Role="OwnerAssets" EntitySet="OwnerAssets" />
       <End Role="Reservations" EntitySet="Reservations" />
     </AssociationSet>
+    <AssociationSet Name="FK_ClassInfo_Locations" Association="FSDPModel.FK_ClassInfo_Locations">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="ClassInfo" EntitySet="ClassInfoes" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_ClassInfo_Locations">
+    <End Type="FSDPModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="FSDPModel.ClassInfo" Role="ClassInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationID" />
+      </Principal>
+      <Dependent Role="ClassInfo">
+        <PropertyRef Name="LocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

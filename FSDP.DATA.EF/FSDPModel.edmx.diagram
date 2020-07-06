@@ -17,6 +17,7 @@
         <AssociationConnector Association="FSDPModel.FK_Reservations_Locations" ManuallyRouted="false" />
         <AssociationConnector Association="FSDPModel.FK_OwnerAssets_UserDetails" ManuallyRouted="false" />
         <AssociationConnector Association="FSDPModel.FK_Reservations_OwnerAssets" ManuallyRouted="false" />
+        <AssociationConnector Association="FSDPModel.FK_ClassInfo_Locations" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

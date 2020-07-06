@@ -30,7 +30,6 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.LevelID })
                 @if (User.IsInRole("Admin"))
                 {
                     <div>| @Html.ActionLink("Edit", "Edit", new { id = item.LevelID }) |</div>

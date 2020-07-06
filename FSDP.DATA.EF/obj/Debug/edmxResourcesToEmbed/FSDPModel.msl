@@ -4,6 +4,7 @@
     <EntitySetMapping Name="ClassInfoes">
       <EntityTypeMapping TypeName="FSDPModel.ClassInfo">
         <MappingFragment StoreEntitySet="ClassInfo">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
           <ScalarProperty Name="ClassID" ColumnName="ClassID" />
           <ScalarProperty Name="ClassName" ColumnName="ClassName" />
           <ScalarProperty Name="Description" ColumnName="Description" />

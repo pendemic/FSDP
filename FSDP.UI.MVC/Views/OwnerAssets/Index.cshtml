@@ -72,7 +72,7 @@
             <img class="card-img-top" src="~/Content/img/@item.AssetPhoto" alt="@item.AssetName">
             <div class="card-body asset">
                 <h5 class="card-title">@item.AssetName</h5>
-                <p class="card-text">Created at: @item.DateAdded <br />@item.Level.LevelName Level</p>
+                <p class="card-text">@item.Level.LevelName Level</p>
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { id = item.OwnerAssetID }) |
                     @Html.ActionLink("Details", "Details", new { id = item.OwnerAssetID }) |

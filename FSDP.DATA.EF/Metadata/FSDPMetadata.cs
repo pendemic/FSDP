@@ -113,6 +113,7 @@ namespace FSDP.DATA.EF//.Metadata
     [MetadataType(typeof(UserDetailMetadata))]
     public partial class UserDetail
     {
+        public string FullName { get { return FirstName + " " + LastName; } }
 
     }
     #endregion
