@@ -270,6 +270,7 @@
     <Content Include="Content\img\counter\counter-3.png" />
     <Content Include="Content\img\counter\counter-4.png" />
     <Content Include="Content\img\counter\counter-bg.jpg" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\img\footer-logo.png" />
     <Content Include="Content\img\gallery\gallery-1.jpg" />
     <Content Include="Content\img\gallery\gallery-2.jpg" />

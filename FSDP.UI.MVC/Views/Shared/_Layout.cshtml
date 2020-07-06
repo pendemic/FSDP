@@ -12,6 +12,7 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="~/Content/favicon.ico" rel="icon">
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" type="text/css">
@@ -39,11 +40,6 @@
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__widget">
-            <ul>
-                <li>CALL US: + 1 800-567-8990</li>
-                <li>WRITE US: OFFICE@EXAMPLE.COM</li>
-                <li>OPENING TIMES: MON - FRI: 9:00 - 19:00</li>
-            </ul>
             <a href=@Url.Action("Register", "Account") class="primary-btn">Register</a>
         </div>
         <nav class="header__menu">
@@ -215,7 +211,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                @*<div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
                     <div class="footer__widget">
                         <h5>Inspiration</h5>
                         <ul>
@@ -226,16 +222,17 @@
                             <li><a href="#">Conditioning</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>*@
                 <div class="col-lg-2 col-md-3 col-sm-6">
                     <div class="footer__widget">
                         <h5>About Us</h5>
                         <ul>
-                            <li><a href="#">Our Vision</a></li>
-                            <li><a href="#">Our Mission</a></li>
-                            <li><a href="#">Meet The Team</a></li>
-                            <li><a href="#">Introduce</a></li>
-                            <li><a href="#">Customer Service</a></li>
+                            <li>@Html.ActionLink("Introduction", "Index", "Home", null, null, "intro", null, null)</li>
+                            <li>@Html.ActionLink("What We Do", "About", "Home", null, null, "whatwedo", null, null)</li>
+                            <li>@Html.ActionLink("Meet Our Instructors", "Index", "Home", null, null, "instructor", null, null)</li>
+                            <li>@Html.ActionLink("What We Offer", "About", "Home", null, null, "offer", null, null)</li>
+                            <li>@Html.ActionLink("Why Us", "Index", "Home", null, null, "why", null, null)</li>
+                            <li>@Html.ActionLink("What We Teach", "Index", "Home", null, null, "topics", null, null)</li>
                         </ul>
                     </div>
                 </div>

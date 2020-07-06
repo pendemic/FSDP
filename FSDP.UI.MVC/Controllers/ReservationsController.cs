@@ -46,9 +46,18 @@ namespace FSDP.UI.MVC.Controllers
         // GET: Reservations/Create
         public ActionResult Create()
         {
+            string user = User.Identity.GetUserId();
             ViewBag.ClassID = new SelectList(db.ClassInfoes, "ClassID", "ClassName");
             ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName");
-            ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName");
+            if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+            {
+                ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName");
+            }
+            else
+            {
+                ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets.Where(a => a.OwnerID == user), "OwnerAssetID", "AssetName");
+            }
+            
             return View();
         }
 
