@@ -103,7 +103,7 @@ namespace FSDP.UI.MVC.Controllers
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName", reservation.OwnerAssetID);
             return View(reservation);
         }
-        [Authorize(Roles = "Admin, Employee, Owner")]
+        [Authorize(Roles = "Admin, Employee")]
         // GET: Reservations/Edit/5
         public ActionResult Edit(int? id)
         {

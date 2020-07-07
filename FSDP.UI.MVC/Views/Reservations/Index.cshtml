@@ -58,17 +58,16 @@
                                             Capacity:  @ViewBag.Reservation/@item.ClassInfo.ClassLimit
 
                                         </p>
-
-                                        <p>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID })
-                                        </p>
                                         <p>
                                             @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                                             {
                                                 <div>|  @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })</div>
-                                            }
-                                        </p>
-                                    </div>
+                                            <p>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID })
+                                            </p>
+                                        }
+                                            </p>
+                                        </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn primary-btn" data-dismiss="modal">Close</button>
