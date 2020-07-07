@@ -1,7 +1,12 @@
 ﻿@model IEnumerable<FSDP.DATA.EF.Reservation>
 @{
     ViewBag.Title = "Reservations";
+
 }
+<p>
+    @Html.ActionLink("New Reservation", "Create","Reservations", null, new { @class = "btn primary-btn" })
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -10,14 +15,17 @@
         <th>
             @Html.DisplayNameFor(model => model.ClassInfo.ClassName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.LocationName)
-        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+        int reservation = item.ClassInfo.Reservations.Count();
+        ViewBag.Reservation = reservation;
+        if (reservation == item.ClassInfo.ClassLimit)
+        {
+            ViewBag.Reservation = "MAX";
+        }
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.OwnerAsset.AssetName)
@@ -26,16 +34,48 @@
                 @Html.DisplayFor(modelItem => item.ClassInfo.ClassName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location.LocationName)
-            </td>
+                <button type="button" class="btn primary-btn" data-toggle="modal" data-target="#exampleModal-@item.ReservationID">More Details</button>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID })
-                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
-                {
-                    <div>|  @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })</div>
-                }
+                <div class="modal fade" id="exampleModal-@item.ReservationID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">@item.OwnerAsset.AssetName</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="detail-pic">
+                                    <img src="~/Content/img/@item.OwnerAsset.AssetPhoto" alt="@item.OwnerAsset.AssetName">
+                                </div>
+                                <div class="modal-right">
+                                    @Html.DisplayFor(modelItem => item.ClassInfo.ClassName)
+                                    <p>
+                                        @Html.DisplayFor(modelItem => item.Location.LocationName)
+                                    </p>
+                                    <p>
+                                        @string.Format($"{item.ClassInfo.ClassDate:D}")
+                                    </p>
+                                    <p>
+                                        Capacity:  @ViewBag.Reservation/@item.ClassInfo.ClassLimit
 
+                                    </p>
+
+                                    <p>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ReservationID })
+                                    </p>
+
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    {
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ReservationID })
+
+                                    }
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn primary-btn" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
     }

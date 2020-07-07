@@ -70,6 +70,7 @@ namespace FSDP.UI.MVC.Controllers
         {
             int nbrRes = db.Reservations.Where(c => c.ClassID == reservation.ClassID).Count();
             int nbrMax = db.ClassInfoes.Where(m => m.ClassID == reservation.ClassID).FirstOrDefault().ClassLimit;
+            TempData["reservation"] = nbrRes;
             if (ModelState.IsValid)
             {
                 if (User.IsInRole("Admin"))

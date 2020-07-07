@@ -14,6 +14,7 @@
 .header__menu {
     margin-top: -45px;
     position: absolute;
+    padding-bottom: 5px;
 }
 .video{
     margin-top: 20px;
@@ -56,4 +57,17 @@
     margin-left: auto;
     margin-right:auto;
     text-align:center;
+}
+.detail-pic{
+    max-height: 200px;
+    max-width: 200px;
+    width: 50%;
+    float: left;
+}
+.modal-right{
+    text-align:right;
+    clear:none;
+    top: 0;
+    width: 49%;
+    margin-left: 50%;
 }
