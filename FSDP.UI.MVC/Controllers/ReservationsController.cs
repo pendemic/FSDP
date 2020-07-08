@@ -85,7 +85,7 @@ namespace FSDP.UI.MVC.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                if (lvl != memlvl)
+                if (lvl > memlvl)
                 {
                     return RedirectToAction("Index");
                 }
