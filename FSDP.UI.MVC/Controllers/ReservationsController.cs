@@ -70,6 +70,8 @@ namespace FSDP.UI.MVC.Controllers
         {
             int nbrRes = db.Reservations.Where(c => c.ClassID == reservation.ClassID).Count();
             int nbrMax = db.ClassInfoes.Where(m => m.ClassID == reservation.ClassID).FirstOrDefault().ClassLimit;
+            int lvl = db.ClassInfoes.Where(l => l.ClassID == reservation.ClassID).FirstOrDefault().LevelRequired;
+            int memlvl = db.OwnerAssets.Where(q => q.OwnerAssetID == reservation.OwnerAssetID).FirstOrDefault().LevelID;
             TempData["reservation"] = nbrRes;
             if (ModelState.IsValid)
             {
@@ -80,6 +82,10 @@ namespace FSDP.UI.MVC.Controllers
                 }
                 //Add functionality for class restrictions
                 if (db.Reservations.Where(o => o.OwnerAssetID == reservation.OwnerAssetID).Count() > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                if (lvl != memlvl)
                 {
                     return RedirectToAction("Index");
                 }
@@ -98,7 +104,7 @@ namespace FSDP.UI.MVC.Controllers
                 
             }
             
-            ViewBag.ClassID = new SelectList(db.ClassInfoes, "ClassID", "ClassName", reservation.ClassID);
+            ViewBag.ClassID = new SelectList(db.ClassInfoes.Where(c => c.LevelRequired == reservation.OwnerAsset.LevelID), "ClassID", "ClassName", reservation.ClassID);
             ViewBag.LocationID = new SelectList(db.Locations, "LocationID", "LocationName", reservation.LocationID);
             ViewBag.OwnerAssetID = new SelectList(db.OwnerAssets, "OwnerAssetID", "AssetName", reservation.OwnerAssetID);
             return View(reservation);
